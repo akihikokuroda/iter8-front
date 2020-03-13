@@ -1,0 +1,49 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  annotations:
+    image.opencontainers.org/created: "2020-03-03T09:07:48-05:00"
+    stack.appsody.dev/authors: Sam Roberts <vieuxtech@gmail.com>
+    stack.appsody.dev/configured: docker.io/appsody/nodejs-express:0.4
+    stack.appsody.dev/created: "2020-02-07T15:21:54Z"
+    stack.appsody.dev/description: Express web framework for Node.js
+    stack.appsody.dev/licenses: Apache-2.0
+    stack.appsody.dev/tag: docker.io/appsody/nodejs-express:0.4.2
+    stack.appsody.dev/title: Node.js Express
+  creationTimestamp: null
+  labels:
+    image.opencontainers.org/title: demo
+    stack.appsody.dev/id: nodejs-express
+    stack.appsody.dev/version: 0.4.2
+  name: demo
+  namespace: tekton-pipelines
+spec:
+  applicationImage: dev.local/demo
+  createKnativeService: false
+  expose: true
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /live
+      port: 3000
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  monitoring:
+    labels:
+      k8s-app: demo
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /ready
+      port: 3000
+    initialDelaySeconds: 5
+    periodSeconds: 2
+    timeoutSeconds: 1
+  service:
+    annotations:
+      prometheus.io/scrape: "true"
+    port: 3000
+    type: NodePort
+  stack: nodejs-express
+  version: 1.0.0
+status: {}
