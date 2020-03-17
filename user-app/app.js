@@ -6,7 +6,7 @@ module.exports = (/*options*/) => {
   app.get('/',
     function (req, res) {
       const request = require('request');
-      request('http://demo:3000/', { json: true }, (err, backres, body) => {
+      request('http://iter8-demo:3000/', { json: true }, (err, backres, body) => {
         if (err) {
           console.log(err);
           body = { "error": "an error occcured " }
